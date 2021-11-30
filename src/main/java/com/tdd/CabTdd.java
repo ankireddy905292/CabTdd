@@ -9,5 +9,12 @@ public class CabTdd {
         double totalFare = distance * COST_PER_KM + time * COST_PER_MIN;
         return Math.max(totalFare, MIN_FARE);
     }
-}
 
+    public double calculateFare(Ride[] rides) {
+        double totalFare = 0.0;
+        for (Ride ride : rides) {
+            totalFare = CalculateFare(ride.getDistance(), ride.getTime());
+        }
+        return totalFare;
+    }
+}
