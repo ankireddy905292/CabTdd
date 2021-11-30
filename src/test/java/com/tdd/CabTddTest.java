@@ -3,6 +3,13 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class CabTddTest {
+    CabTdd CabTdd;
+
+    @Test
+    public void setup() {
+        CabTdd = new CabTdd();
+    }
+
     @Test
     public void givenDistanceAndTime_ShouldReturnTotalFare() {
         CabTdd CabTdd = new CabTdd();
@@ -14,7 +21,7 @@ public class CabTddTest {
 
     @Test
     public void givenLessDistanceAndTime_ShouldReturnMinFare() {
-        CabTdd CabTdd = new CabTdd();
+        CabTdd invoiceService = new CabTdd();
         double distance = 0.1;
         int time = 1;
         double totalFare = CabTdd.calculateFare(distance, time);
@@ -28,8 +35,8 @@ public class CabTddTest {
                 new Ride(0.1, 1),
                 new Ride(20, 60)
         };
-        CabTdd CabTdd = new CabTdd();
-        double totalFare = CabTdd.calculateTotalFare(rides);
+        CabTdd invoiceService = new CabTdd();
+        double totalFare = invoiceService.calculateTotalFare(rides);
         Assert.assertEquals(260, totalFare, 0);
     }
 
@@ -44,4 +51,10 @@ public class CabTddTest {
         Assert.assertEquals(expectedInvoices.getInvoiceSummary(), EnhancedSummary.getInvoiceSummary());
     }
 
+    @Test
+    public void givenUserId_ShouldReturnInvoiceSummary() {
+        EnhancedSummary invoiceSummary = CabTdd.getInvoice(1);
+        EnhancedSummary expectedInvoices = new EnhancedSummary(2, 30);
+        Assert.assertEquals(expectedInvoices.getInvoiceSummary(), invoiceSummary.getInvoiceSummary());
+    }
 }
