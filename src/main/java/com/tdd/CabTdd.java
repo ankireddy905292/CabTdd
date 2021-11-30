@@ -10,11 +10,19 @@ public class CabTdd {
         return Math.max(totalFare, MIN_FARE);
     }
 
-    public double calculateFare(Ride[] rides) {
+    public double calculateTotalFare(Ride[] rides) {
         double totalFare = 0.0;
         for (Ride ride : rides) {
-            totalFare = CalculateFare(ride.getDistance(), ride.getTime());
+            totalFare = calculateFare(ride.getDistance(), ride.getTime());
         }
         return totalFare;
+
+    }
+    public EnhancedSummary calculateFare(Ride[] rides) {
+        double totalFare = 0.0;
+        for (Ride ride : rides) {
+            totalFare += calculateFare(ride.getDistance(), ride.getTime());
+        }
+        return new EnhancedSummary(rides.length, totalFare);
     }
 }
